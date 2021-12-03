@@ -1,0 +1,43 @@
+.routineContainer {
+  width: 100vw;
+  height: 100%;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.routineSidebarMenu {
+  padding-left: 2rem;
+  border-right: 1px solid #fffafb;
+}
+
+.routineSidebarMenu h2 {
+  font-size: 2rem;
+  padding-right: 1rem;
+}
+
+.routineMenuList {
+  list-style: none;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.routineMenuItems {
+  margin-top: 0.5rem;
+  margin-left: 0;
+  cursor: pointer;
+  &:hover {
+    color: #7de2d1;
+  }
+}
+.routineMenuItems.selected {
+  color: #7de2d1;
+}
+
+.contentDisplay {
+  width: 100%;
+  padding-right: 2rem;
+}

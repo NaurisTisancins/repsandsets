@@ -1,19 +1,20 @@
-.main {
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 5%;
   background-color: #2b2c28;
   letter-spacing: 2px;
+  box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.5);
 }
 
-li,
-a,
-button,
-.title {
+.navbar li,
+.navbar a,
+.navbar .title {
   font-weight: 500;
-  font-size: 16px;
-  color: #ecf0f1;
+  font-size: 18px;
+  color: #fffafb;
+  background-color: #2b2c28;
   text-decoration: none;
   text-shadow: 1px 1px 1px rgba(19, 21, 21, 1);
 }
@@ -34,16 +35,4 @@ button,
 }
 .navLinks li a:hover {
   color: #7de2d1;
-}
-
-button {
-  padding: 9px 25px;
-  background-color: rgba(51, 153, 137, 1);
-  border: none;
-  border-radius: 18px;
-  cursor: pointer;
-  transition: all 0.3s ease 0s;
-}
-button:hover {
-  background-color: rgba(51, 153, 137, 0.8);
 }

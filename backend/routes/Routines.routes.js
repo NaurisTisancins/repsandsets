@@ -2,15 +2,18 @@ const express = require('express');
 const logger = require('../logger');
 const router = express.Router();
 
-//todo - create controller functs to add routines
 const {
   createRoutine,
   readRoutines,
+  addSession,
+  deleteRoutine,
 } = require('../controllers/routines.controller');
 
 router
   .post("/", createRoutine)
-  .get("/:id?", readRoutines)
+  .get("/:routineId?", readRoutines)
+  .put("/session/:routineId", addSession)
+  .delete("/:routineId", deleteRoutine)
   
 
 module.exports = router;

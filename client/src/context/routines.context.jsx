@@ -7,8 +7,11 @@ let headers = {
 
 export const RoutinesContext = createContext({
   fetchRoutines: () => { },
+  fetchRoutine: () => { },
   createRoutine: () => { },
   removeRoutine: () => { },
+  updateRoutine: () => { },
+  addSession: () => {},
   loaded: false,
   loading: false,
   error: null,
@@ -64,9 +67,7 @@ export const RoutinesProvider = (props) => {
 
   const fetchRoutines = useCallback(async () => {
     if (loading || loaded || error) return;
-
     setLoading();
-
     try {
       const response = await fetch("/api/v1/routines", {
         method: "GET",
@@ -74,13 +75,31 @@ export const RoutinesProvider = (props) => {
       });
       if (!response.ok) throw response;
       const data = await response.json();
-      console.log("context fetch routines",data)
+      console.log("context fetch routines", data)
       setRoutines(data);
     } catch (e) {
       console.log("fetchroutines, routines.context error", e);
       setError(e);
     }
   });//fetchRoutines
+    
+  const fetchRoutine = useCallback(async (id) => {
+    if (loading || loaded || error) return;
+    setLoading();
+    try {
+      const response = await fetch(`/api/v1/routines/${id}`, {
+        method: "GET",
+        headers: headers,
+      });
+      if (!response.ok) throw response;
+      const data = await response.json();
+      console.log("context fetch routine", data)
+      setRoutines(data);
+    } catch (e) {
+      console.log("fetchroutine, routines.context error", e);
+      setError(e);
+    }
+  });//fetchRoutine
 
   const createRoutine = useCallback(async (formData) => {
     setLoading();
@@ -88,9 +107,7 @@ export const RoutinesProvider = (props) => {
     try {
       const response = await fetch("/api/v1/routines", {
         method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
+        headers: headers,
         body: JSON.stringify(formData)
       });
       if (response.status !== 201) {
@@ -116,7 +133,7 @@ export const RoutinesProvider = (props) => {
     setLoading();
     const { routines } = state;
     try {
-      const response = await fetch(`api/v1/routines/${id}`, {
+      const response = await fetch(`/api/v1/routines/${id}`, {
         method: "DELETE",
         headers: headers,
       });
@@ -138,7 +155,50 @@ export const RoutinesProvider = (props) => {
         appearance: "error",
       });
     }
-  })
+  });//removeroutine
+
+  const updateRoutine = useCallback(async (id, updates) => {
+    let newRoutine = null;
+    setLoading();
+    const { routines } = state;
+    try {
+      const response = await fetch(`/api/v1/routines/${id}`, {
+        method: "PUT",
+        headers: headers,
+        body: JSON.stringify(updates),
+      });
+      console.log(response);
+      if (!response.ok) {
+        throw response;
+      };
+      //update the state
+      const index = routines.findIndex((routine) => routine._id === id);
+      const oldRoutine = routines[index];
+      newRoutine = {
+        ...oldRoutine,
+        ...updates,
+      };
+      const updatedRoutines = [
+        ...routines.slice(0, index),
+        newRoutine,
+        ...routines.slice(index + 1),
+      ];
+      setRoutines(updatedRoutines);
+      addToast(`Updated ${newRoutine.routineName} routine`, {
+        appearance: "success",
+      })
+    } catch (e) {
+      console.log(e);
+      setError(e);
+      addToast(`Error failed to update  ${newRoutine.routineName}`, {
+        appearance: "error",
+      });
+    }
+  });//updateRoutine
+
+  const addSession = useCallback(async (id, session) => {
+
+  }); //addSession
 
 
   return (
@@ -149,8 +209,11 @@ export const RoutinesProvider = (props) => {
         loaded,
         error,
         fetchRoutines,
+        fetchRoutine,
         createRoutine,
         removeRoutine,
+        updateRoutine,
+        addSession,
       }}
     >
       {props.children}

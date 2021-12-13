@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './styles.scss';
 
 export const RoutineDetails = ({ routine }) => {
@@ -9,17 +10,19 @@ export const RoutineDetails = ({ routine }) => {
         <ul className="movementList">
           {routine.movements.map(({ name, _id }) => {
             return (
-              <div className="itemRow">
+              <div className="itemRow" key={_id}>
                 <li
                   className="movementListItem"
-                  key={_id}>{name}</li>
+                  >{name}</li>
                 <button className="statBtn">Statistics</button>
               </div>
             )
           })}
         </ul>
         <div className="itemRow">
-          <button className="addMovementBtn">Add Movement</button>
+          <Link
+          to={`/routines/update/${routine._id}`}
+          ><button className="addMovementBtn">Add Movement</button></Link>
         </div>
       </div>
     </div>

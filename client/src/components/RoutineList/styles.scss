@@ -40,10 +40,18 @@
   background-color: red;
   padding: 3px 7px;
   margin-left: 0.7rem;
+  &:hover {
+    background-color: darkred;
+  }
 }
 
-.deleteBtn:hover {
-  background-color: darkred;
+.editBtn {
+  background-color: #339989;
+  padding: 3px 7px;
+  margin-left: 0.7rem;
+  &:hover {
+    background-color: #7de2d1;
+  }
 }
 
 .addRoutineBtn {

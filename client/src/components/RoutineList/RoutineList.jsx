@@ -36,7 +36,11 @@ export const RoutineList = () => {
               </Link>
               <button
                 onClick={() => handleDelete(routine._id)}
-                className="deleteBtn">X</button>
+                className="deleteBtn">x</button>
+              <Link
+                className="link"
+                to={`/routines/update/${routine._id}`}
+              ><button className="editBtn">edit</button></Link>
             </li>
           )
         })}

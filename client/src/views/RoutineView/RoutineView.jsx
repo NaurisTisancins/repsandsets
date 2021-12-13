@@ -10,7 +10,7 @@ export function RoutineView() {
   const [routine, setRoutine] = useState({});
 
 
-  useEffect(async () => {
+  useEffect(() => {
     if (!loading || !loaded) {
       fetchRoutines();
     }
@@ -22,7 +22,8 @@ export function RoutineView() {
         ...routine,
         ...routines[index],
       });
-    }
+      
+      }
   }, [fetchRoutines, setRoutine, routines])
 
 

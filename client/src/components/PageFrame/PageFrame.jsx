@@ -1,5 +1,5 @@
 import React from 'react'
-import './styles.scss';
+import './../../styles/pageframe.styles.scss';
 
 export function PageFrame(props) {
   return (

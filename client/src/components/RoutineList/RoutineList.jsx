@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import './styles.scss';
+import './../../styles/routine-list.styles.scss';
 import { Link } from 'react-router-dom';
 import { RoutinesContext } from '../../context';
 
@@ -22,33 +22,31 @@ export const RoutineList = () => {
   if (error) return <div>Error: {error}</div>
 
   return (
-    <div className="routinelist">
-      <ul className="list">
+    <div className="routine-list">
+      <ul className="routine-list__list">
         {routines.map(routine => {
           return (
             <li
               key={routine._id}
-              className="listitem">
+              className="routine-list__list-item">
               <Link
-                className="link"
+                className="routine-list__link"
                 to={`/routines/${routine._id}`}>
-                {routine.routineName}
+                {routine.name}
               </Link>
               <button
                 onClick={() => handleDelete(routine._id)}
-                className="deleteBtn">x</button>
+                className="routine-list__delete-btn">x</button>
               <Link
-                className="link"
+                className="routine-list__link"
                 to={`/routines/update/${routine._id}`}
-              ><button className="editBtn">edit</button></Link>
+              ><button className="routine-list__edit-btn">edit</button></Link>
             </li>
           )
         })}
       </ul>
-      <Link className="link" to="/routines/add">
-        <button className="addRoutineBtn">
+      <Link className="routine-list__link--add-routine" to="/routines/add">
           Add Routine
-        </button>
       </Link>
     </div>
   )

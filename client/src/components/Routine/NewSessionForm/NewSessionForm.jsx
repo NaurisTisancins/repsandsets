@@ -1,18 +1,13 @@
-import React, {useState, useEffect, useContext} from 'react';
-import { RoutinesContext } from '../../../context';
-import { MovementInputs } from '../MovementInputs';
+// import React from 'react';
 
-export function NewSessionForm({routine}) {
-    const { _id, routineName, sessions, movements } = routine;
-    const { addSession } = useContext(RoutinesContext);
-
-    
-    
-    return (
-        <div className="sessionFormContainer">
-            {JSON.stringify(movements)}
-        </div>
-    )
-}
-
-
+// export function NewSessionForm({movements}) {
+//     return (
+//         <div className="sessionFormContainer">
+//             {movements.map(movement => {
+//                 return (
+//                     <div>{movement.name}</div>
+//                 )
+//             })}
+//         </div>
+//     )
+// }

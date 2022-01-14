@@ -35,7 +35,9 @@ export default {
     /* ... */
   },
   devOptions: {
-    /* ... */
+    port: 3000,
+    src: 'src',
+    bundle: false,
   },
   buildOptions: {
     /* ... */

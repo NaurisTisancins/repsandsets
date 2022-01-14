@@ -1,116 +1,118 @@
 import React, { useState, useContext, useEffect } from 'react';
-import * as yup from 'yup';
+import { RoutineSchema } from "../../yupSchemas";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm, useFieldArray, useWatch } from 'react-hook-form';
+import {
+  useForm,
+  FormProvider,
+} from 'react-hook-form';
 import { useNavigate } from "react-router-dom";
-import './styles.scss'
+import './../../styles/form.styles.scss';
+import { SessionPlanFormArray } from '.';
+
 
 import { RoutinesContext } from '../../context';
 
-const schema = yup.object().shape({
-    routineName: yup.string().required(),
-    movements: yup.array()
-        .of(
-            yup.object().shape({
-                name: yup.string(),
-            })
-        )
-});
-
 export const RoutineForm = ({ initialValues }) => {
-    const { createRoutine, updateRoutine } = useContext(RoutinesContext)
-    const navigate = useNavigate();
-    const [populated, setPopulated] = useState(false);
+  const { createRoutine, updateRoutine } = useContext(RoutinesContext)
+  const [populated, setPopulated] = useState(false);
+  const navigate = useNavigate();
 
-    let defaultValues = {
-        routineName: "",
-        movements: [],
+  let defaultValues = {
+    name: "",
+    units: "kg",
+    sessionPlan:
+      [{
+        sessionFocus: "Volume",
+        selectedEcercises:
+          [{
+            exercise: "",
+            repRange: {
+              min: "",
+              max: "",
+            }
+          }]
+      }]
+  }
+
+  // const {  name } = initialValues;
+
+  const methods = useForm({
+    resolver: yupResolver(RoutineSchema),
+    mode: "onChange",
+    reValidateMode: "onChange",
+    defaultValues: defaultValues,
+  });
+
+  const { error, isDirty, isValid } = methods.formState;
+
+  useEffect(() => {
+    if (initialValues && !populated) {
+      methods.reset({
+        ...initialValues,
+      });
+      setPopulated(true);
     }
+  }, [setPopulated, initialValues])
 
-    // const { movements, sessions, routineName } = initialValues;
+  const onSubmit = (values) => {
+    if (populated) {
+      const updates = {
+        ...initialValues,
+        ...values,
+      };
+      updateRoutine(initialValues._id, updates)
+      navigate("/")
+    } else {
+      createRoutine(values);
+      // navigate(`/routines/add/session-plan/${id}`)
+    }
+    methods.reset(defaultValues);
+  };//onsubmit
 
-    const { register, handleSubmit, control, reset, formState } = useForm({
-        resolver: yupResolver(schema),
-        mode: "onChange",
-        reValidateMode: "onChange",
-        defaultValues: defaultValues,
-    });
-    const { fields, append, remove } = useFieldArray({
-        control,
-        name: "movements",
-    });
-    const { isDirty, isValid } = formState;
+  return (
+    <FormProvider {...methods}>
+      <form className="form" onSubmit={methods.handleSubmit(onSubmit)}>
 
-    useEffect(() => {
-        if (initialValues && !populated) {
-            // initialValues.price = initialValues.price / 100;
-            reset({
-                ...initialValues,
-            });
-            fields.forEach(field => append({}));
-            setPopulated(true);
-        }
+        <div className="form__group">
+          <label className="form__label">Routine name: </label>
+          <input
+            className="form__input"
+            type="text"
+            name="name"
+            {...methods.register("name")}
+          />
+        </div>
 
-    }, [fields, setPopulated, initialValues])
+        <div className="form__group form__group--options">
+          <label className="form__label">
+            Units of resistance:
+            <select
+              className="form__input"
+              name="units"
+              {...methods.register("units")}
+            >
+              <option value="kg">Kg</option>
+              <option value="lbs">Lbs</option>
+            </select>
+          </label>
+        </div>
 
-    const onSubmit = (values) => {
-        if (populated) {
-            const updates = {
-                ...initialValues,
-                ...values,
-            };
-            updateRoutine(initialValues._id, updates)
-        } else {
-            createRoutine(values);
-            console.log(values);
-        }
-        reset(defaultValues);
-        navigate("/");
-    };//onsubmit
+        <SessionPlanFormArray />
+        
+        <div className="buttonarea">
+          <button
+            className="submitbtn"
+            type="submit"
+          >
+            Save Session
+          </button>
+        </div>
 
-    return (
-        <form className="form" onSubmit={handleSubmit(onSubmit)}>
-            <div className="form__group field">
-                <input
-                    className="form__field"
-                    id="routineName"
-                    type="text"
-                    {...register("routineName")}
-                />
-                <label className="form__label">Routine name: </label>
-            </div>
+        <pre>
+          {JSON.stringify(methods.watch(), null, 2)}
+        </pre>
 
-            <p>Add movements to your routine</p>
-
-            {fields.map(({ id }, index) => {
-                return (
-                    <div className="form__group field movement" key={id}>
-                        <>
-                            <input
-                                className="form__field"
-                                name={`movements.${index}.name`}
-                                type="text"
-                                {...register(`movements.${index}.name`)}
-                            />
-                            <label className="form__label">Movement name: </label>
-                        </>
-                        <button onClick={() => remove(index)}>Remove</button>
-                    </div>
-                )
-            })}
-
-
-            <div className="buttonarea">
-                <button
-                    className="submitbtn"
-                    type="submit"
-                // disabled={!isValid || !isDirty}
-                >Submit</button>
-                <button
-                    type="button"
-                    onClick={() => append({})}
-                >Add Movement</button>
-            </div>
-        </form>
-    )
+      </form>
+    </FormProvider>
+  )
 }

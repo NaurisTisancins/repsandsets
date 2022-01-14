@@ -2,5 +2,14 @@
   "name": "exercise-tracker",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "setup": "concurrently --kill-others-on-fail  \"cd server && npm i\" \"cd client && npm i --network-concurrency 1\"",
+    "client:dev": "cd client && npm run start",
+    "server:dev": "cd server && npm run start:dev",
+    "dev": "concurrently --kill-others-on-fail \"npm run server:dev\" \"npm run client:dev\"",
+    "start": "npm run server",
+    "client": "cd client && npm run build",
+    "server": "cd server && npm run start"
+}
 }

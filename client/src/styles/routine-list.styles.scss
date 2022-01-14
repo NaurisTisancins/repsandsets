@@ -1,4 +1,4 @@
-.routinelist {
+.routine-list {
   color: #fffafb;
   display: flex;
   flex-direction: column;
@@ -10,18 +10,14 @@
   margin-right: auto;
 }
 
-.listtitle {
-  margin: 30px 0;
-}
-
-.list {
+.routine-list__list {
   list-style: none;
 }
 
-.listitem {
+.routine-list__list-item {
   font-size: 1.5rem;
   margin: 10px 0;
-  & > .link {
+  & > .routine-list__link {
     text-decoration: none;
     &:hover {
       color: rgba(51, 153, 137, 0.8);
@@ -36,7 +32,7 @@
   height: 100%;
 }
 
-.deleteBtn {
+.routine-list__delete-btn {
   background-color: red;
   padding: 3px 7px;
   margin-left: 0.7rem;
@@ -45,7 +41,7 @@
   }
 }
 
-.editBtn {
+.routine-list__edit-btn {
   background-color: #339989;
   padding: 3px 7px;
   margin-left: 0.7rem;
@@ -54,6 +50,4 @@
   }
 }
 
-.addRoutineBtn {
-  background-color: #682d63;
-}
+

@@ -5,6 +5,7 @@ const router = express.Router();
 const {
     createRoutine,
     readRoutines,
+    readRoutine,
     addSession,
     deleteRoutine,
     updateRoutine,
@@ -12,10 +13,11 @@ const {
 
 router
     .post("/", createRoutine)
-    .get("/:routineId?", readRoutines)
-    .put("/:routineId", updateRoutine)
-    .delete("/:routineId", deleteRoutine)
-    .put("/sessions/:routineId", addSession)
+    .get("/", readRoutines)
+    .get("/:id", readRoutine)
+    .patch("/:id", updateRoutine)
+    .delete("/:id", deleteRoutine)
+    .put("/sessions/:id", addSession)
 
 
 module.exports = router;

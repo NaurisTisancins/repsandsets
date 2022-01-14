@@ -11,7 +11,7 @@ export const RoutinesContext = createContext({
   createRoutine: () => { },
   removeRoutine: () => { },
   updateRoutine: () => { },
-  addSession: () => {},
+  addSession: () => { },
   loaded: false,
   loading: false,
   error: null,
@@ -28,7 +28,7 @@ export const RoutinesProvider = (props) => {
     routines: [],
   });//State
 
-  const { loading, error, routines, loaded } = state;
+  const { loading, error, routines, currentRoutine, loaded } = state;
 
   const setLoading = useCallback(
     () =>
@@ -82,24 +82,6 @@ export const RoutinesProvider = (props) => {
       setError(e);
     }
   });//fetchRoutines
-    
-  const fetchRoutine = useCallback(async (id) => {
-    if (loading || loaded || error) return;
-    setLoading();
-    try {
-      const response = await fetch(`/api/v1/routines/${id}`, {
-        method: "GET",
-        headers: headers,
-      });
-      if (!response.ok) throw response;
-      const data = await response.json();
-      console.log("context fetch routine", data)
-      setRoutines(data);
-    } catch (e) {
-      console.log("fetchroutine, routines.context error", e);
-      setError(e);
-    }
-  });//fetchRoutine
 
   const createRoutine = useCallback(async (formData) => {
     setLoading();
@@ -116,12 +98,13 @@ export const RoutinesProvider = (props) => {
       const savedRoutine = await response.json();
       console.log("got data", savedRoutine);
       setRoutines([...routines, savedRoutine]);
-      addToast(`Saved ${savedRoutine.routineName}`, {
+      addToast(`Saved ${savedRoutine.name}`, {
         appearance: "success",
       });
+      return savedRoutine._id;
     } catch (e) {
       console.log(e);
-      setState(e);
+      setError(e);
       addToast(`Error ${e.message || e.statusText}`, {
         appearance: "error",
       });
@@ -145,13 +128,13 @@ export const RoutinesProvider = (props) => {
         ...routines.slice(index + 1),
       ];
       setRoutines(updatedRoutines);
-      addToast(`Deleted ${deletedRoutine.routineName}`, {
+      addToast(`Deleted ${deletedRoutine.name}`, {
         appearance: "success",
       });
     } catch (e) {
       console.log(e);
       setError(e);
-      addToast(`Error: Failed to update ${deletedRoutine.routineName}`, {
+      addToast(`Error: Failed to DELETE ${deletedRoutine.name}`, {
         appearance: "error",
       });
     }
@@ -163,11 +146,11 @@ export const RoutinesProvider = (props) => {
     const { routines } = state;
     try {
       const response = await fetch(`/api/v1/routines/${id}`, {
-        method: "PUT",
+        method: "PATCH",
         headers: headers,
         body: JSON.stringify(updates),
       });
-      console.log(response);
+      console.log("updateRoutine", response);
       if (!response.ok) {
         throw response;
       };
@@ -184,13 +167,13 @@ export const RoutinesProvider = (props) => {
         ...routines.slice(index + 1),
       ];
       setRoutines(updatedRoutines);
-      addToast(`Updated ${newRoutine.routineName} routine`, {
+      addToast(`Updated ${newRoutine.name} routine`, {
         appearance: "success",
       })
     } catch (e) {
       console.log(e);
       setError(e);
-      addToast(`Error failed to update  ${newRoutine.routineName}`, {
+      addToast(`Error failed to update  ${newRoutine.name}`, {
         appearance: "error",
       });
     }
@@ -205,11 +188,11 @@ export const RoutinesProvider = (props) => {
     <RoutinesContext.Provider
       value={{
         routines,
+        currentRoutine,
         loading,
         loaded,
         error,
         fetchRoutines,
-        fetchRoutine,
         createRoutine,
         removeRoutine,
         updateRoutine,

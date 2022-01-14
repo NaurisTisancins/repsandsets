@@ -1,0 +1,68 @@
+// globals
+$primary: #339989;
+$secondary: #7de2d1;
+$white: #fff;
+$gray: #cfdbd5;
+$dark: #131515;
+$light-dark: #2b2c28;
+$danger: #d90429;
+
+.form {
+  color: #fffafb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40rem;
+  margin: 1rem auto;
+}
+
+.form.form__field-array {
+  margin-top: 1rem;
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin-top: 0.5rem;
+}
+
+.form__group.form__group--options {
+  flex-direction: row;
+}
+
+.form__subtitle {
+  margin-top: 1rem;
+}
+
+.form__label {
+  width: 100%;
+  text-align: left;
+}
+
+.form__input {
+  width: 97.5%;
+  padding: 10px 5px;
+  border: solid 1px $light-dark;
+  border-radius: 8px;
+  background: $gray;
+  color: $dark;
+  margin: 8px 5px;
+  font-size: 1.2rem;
+}
+
+.form__input.form__input--select {
+  width: 95%;
+  &[multiple="multiple"] {
+    height: auto;
+    border: solid 1px $light-dark;
+    border-radius: 3px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.07);
+  }
+}
+
+
+
+

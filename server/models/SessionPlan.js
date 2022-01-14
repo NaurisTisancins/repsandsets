@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const sessionPlanSchema = new Schema({
+  name: String,
   sessionFocus: {
     type: String,
     enum: {

@@ -9,6 +9,8 @@ $danger: #d90429;
 
 .form {
   color: #fffafb;
+  background: $light-dark;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,24 +19,38 @@ $danger: #d90429;
   margin: 1rem auto;
 }
 
-.form.form__field-array {
-  margin-top: 1rem;
+.form.form__field-array.form__field-array--session {
+  margin: 1rem 0;
+  border: 1px solid $gray;
+  width: 40rem;
 }
 
+.form.form__field-array.form__field-array--exercises {
+  margin: 1rem 0;
+  border: solid 1px $gray;
+  width: 38rem;
+}
+
+.form__subtitle {
+  margin-top: 1rem;
+}
 .form__group {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 80%;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0;
 }
-
-.form__group.form__group--options {
+.form__group.form__group--min-max {
   flex-direction: row;
+  justify-content: flex-end;
 }
 
-.form__subtitle {
-  margin-top: 1rem;
+.form__label.form__label--min-max {
+  width: 33.3%;
+}
+.form__input.form__input--min-max {
+  width: 23.3%;
 }
 
 .form__label {
@@ -62,7 +78,16 @@ $danger: #d90429;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.07);
   }
 }
-
-
-
-
+.form__button-area {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.button.form__btn--delete {
+  background: $danger;
+}
+.button.form__btn--submit {
+  width: 80%;
+  height: 2.5rem;
+}

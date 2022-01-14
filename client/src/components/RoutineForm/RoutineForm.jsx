@@ -22,8 +22,9 @@ export const RoutineForm = ({ initialValues }) => {
     units: "kg",
     sessionPlan:
       [{
+        name: "",
         sessionFocus: "Volume",
-        selectedEcercises:
+        selectedExercises:
           [{
             exercise: "",
             repRange: {
@@ -99,14 +100,14 @@ export const RoutineForm = ({ initialValues }) => {
 
         <SessionPlanFormArray />
         
-        <div className="buttonarea">
+        <section className="form__button-area">
           <button
-            className="submitbtn"
+            className="button form__btn--submit"
             type="submit"
           >
-            Save Session
+            Save Routine
           </button>
-        </div>
+        </section>
 
         <pre>
           {JSON.stringify(methods.watch(), null, 2)}

@@ -4,7 +4,7 @@ import "./../../styles/form.styles.scss";
 import { ExercisesFormArray } from ".";
 
 export const SessionPlanFormArray = () => {
-  const { control, register, formState } = useFormContext();
+  const { control, register, getValues, formState } = useFormContext();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "sessionPlan"
@@ -12,11 +12,19 @@ export const SessionPlanFormArray = () => {
 
   return (
     <>
-      <div className="form form__field-array">
-        <h2>Your Session plan: </h2>
+      <div className="form form__field-array form__field-array--session">
+        <h2 className="form__subtitle">Your Session plan: </h2>
         {fields.map((item, index) => {
           return (
+
             <div className="form__group" key={item.id}>
+              <label className="form__label">Session name:
+                <input
+                  className="form__input"
+                  name={`sessionPlan[${index}].name`}
+                  {...register(`sessionPlan[${index}].name`)}
+                  type="text" />
+              </label>
               <label
                 className="form__label"
               >Session Focus:
@@ -31,19 +39,22 @@ export const SessionPlanFormArray = () => {
                 </select>
               </label>
               <ExercisesFormArray nestedIndex={index} />
-              <button type="button" onClick={() => remove(index)}>
-                Delete Session
+              <button
+                className="button form__btn--delete"
+                type="button" onClick={() => remove(index)}>
+                Delete Session: {`${getValues(`sessionPlan[${index}].name`)}`}
               </button>
             </div>
           );
         })}
       </div>
 
-      <section>
+      <section className="form__button-area">
         <button
           type="button"
           onClick={() => {
             append({
+              name: "",
               sessionFocus: "Volume",
               selectedExercises:
                 [{

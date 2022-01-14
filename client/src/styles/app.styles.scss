@@ -14,11 +14,11 @@ $danger: #d90429;
   padding: 0;
   font-family: 'Roboto', sans-serif;
   
-  color: #fffafb;
 }
 
 html {
   background: $dark;
+  
   height: 100vh;
   width: 100vw;
 }
@@ -29,6 +29,7 @@ html {
 }
 
 button {
+  color: #fffafb;
   margin: 1rem auto;
   padding: 7px 17px;
   background-color: rgba(51, 153, 137, 1);

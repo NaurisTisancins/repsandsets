@@ -8,30 +8,28 @@ $light-dark: #2b2c28;
 $danger: #d90429;
 
 .form {
-  color: #fffafb;
+  color: $dark;
   background: $light-dark;
   border-radius: 10px;
+  border: 1px solid $gray;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 40rem;
-  margin: 1rem auto;
+  margin: 1rem 0 1rem 0;
 }
 
 .form.form__field-array.form__field-array--session {
-  margin: 1rem 0;
-  border: 1px solid $gray;
-  width: 40rem;
+  width: 39rem;
 }
 
 .form.form__field-array.form__field-array--exercises {
-  margin: 1rem 0;
-  border: solid 1px $gray;
   width: 38rem;
 }
 
 .form__subtitle {
+  color: #fffafb;
   margin-top: 1rem;
 }
 .form__group {
@@ -56,6 +54,7 @@ $danger: #d90429;
 .form__label {
   width: 100%;
   text-align: left;
+  color: #fffafb;
 }
 
 .form__input {
@@ -72,10 +71,10 @@ $danger: #d90429;
 .form__input.form__input--select {
   width: 95%;
   &[multiple="multiple"] {
+    color: $dark;
     height: auto;
     border: solid 1px $light-dark;
     border-radius: 3px;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(0, 0, 0, 0.07);
   }
 }
 .form__button-area {

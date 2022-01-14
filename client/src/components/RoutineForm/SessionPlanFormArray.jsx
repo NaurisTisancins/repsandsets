@@ -29,7 +29,7 @@ export const SessionPlanFormArray = () => {
                 className="form__label"
               >Session Focus:
                 <select
-                  className="form__input"
+                  className="form__input form__input--select"
                   name={`sessionPlan[${index}].sessionFocus`}
                   {...register(`sessionPlan[${index}].sessionFocus`)}
                 >

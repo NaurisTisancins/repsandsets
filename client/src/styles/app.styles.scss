@@ -42,3 +42,13 @@ button {
 button:hover {
   background-color: rgba(51, 153, 137, 0.8);
 }
+
+button:active {
+  background-color: white;
+  color: $primary;
+}
+
+button:disabled {
+  background-color: $dark;
+  cursor: default;
+}

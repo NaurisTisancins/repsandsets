@@ -1,1 +1,1 @@
-// export * from './RoutineDetails';
+export * from './RoutineDetails';

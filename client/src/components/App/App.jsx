@@ -6,6 +6,7 @@ import {
   Home,
   AddRoutine,
   UpdateRoutine,
+  RoutineView,
 } from '../../views';
 import { RoutinesProvider } from '../../context';
 
@@ -21,14 +22,11 @@ export const App = () => {
           <Route exact path="/routines/add"
             element={<AddRoutine />} />
 
-          {/* <Route exact path="/routines/add/session-plan/:id"
-            element={<AddRoutinePlan />} /> */}
-
           <Route exact path="/routines/update/:id"
             element={<UpdateRoutine />} />
 
-          {/* <Route exact path="/routines/:id"
-            element={<RoutineView />} /> */}
+          <Route exact path="/routines/:id"
+            element={<RoutineView />} />
 
           <Route path="*"
             element={<Home />} />

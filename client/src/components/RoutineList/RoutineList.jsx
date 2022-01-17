@@ -7,7 +7,7 @@ export const RoutineList = () => {
   const { routines, loaded, loading, error, fetchRoutines, removeRoutine } = useContext(RoutinesContext);
 
   useEffect(() => {
-    if (!loading && !loaded) {
+    if (!loading && !loaded && !routines.length) {
       fetchRoutines()
     }
     // console.log("in useEffect", routines, loaded, loading)
@@ -40,13 +40,17 @@ export const RoutineList = () => {
               <Link
                 className="routine-list__link"
                 to={`/routines/update/${routine._id}`}
-              ><button className="routine-list__edit-btn">edit</button></Link>
+              >
+                <button className="routine-list__edit-btn">edit</button>
+              </Link>
             </li>
           )
         })}
       </ul>
       <Link className="routine-list__link--add-routine" to="/routines/add">
+        <button className="button routine-list__add-btn">
           Add Routine
+        </button>
       </Link>
     </div>
   )

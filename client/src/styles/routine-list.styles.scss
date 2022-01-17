@@ -1,3 +1,11 @@
+$primary: #339989;
+$secondary: #7de2d1;
+$white: #fff;
+$gray: #cfdbd5;
+$dark: #131515;
+$light-dark: #2b2c28;
+$danger: #d90429;
+
 .routine-list {
   color: #fffafb;
   display: flex;
@@ -5,6 +13,9 @@
   justify-content: center;
   align-items: center;
   width: 30rem;
+  background: $light-dark;
+  border-radius: 10px;
+  border: 1px solid $gray;
   margin-top: 3rem;
   margin-left: auto;
   margin-right: auto;
@@ -12,12 +23,18 @@
 
 .routine-list__list {
   list-style: none;
+  width: 80%;
 }
 
 .routine-list__list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   font-size: 1.5rem;
   margin: 10px 0;
   & > .routine-list__link {
+    color: $white;
     text-decoration: none;
     &:hover {
       color: rgba(51, 153, 137, 0.8);
@@ -25,17 +42,19 @@
   }
 }
 
-.link {
+.routine-list__link {
   background-color: transparent;
   text-decoration: none;
-  width: 100%;
+  display: flex;
+  align-items: center;
+justify-content: center;
   height: 100%;
 }
 
 .routine-list__delete-btn {
   background-color: red;
   padding: 3px 7px;
-  margin-left: 0.7rem;
+  margin-right: 10px;
   &:hover {
     background-color: darkred;
   }
@@ -44,10 +63,14 @@
 .routine-list__edit-btn {
   background-color: #339989;
   padding: 3px 7px;
-  margin-left: 0.7rem;
+  margin: 10px auto;
   &:hover {
     background-color: #7de2d1;
   }
+}
+
+.routine-list__add-btn {
+
 }
 
 

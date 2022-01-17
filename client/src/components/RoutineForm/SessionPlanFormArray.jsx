@@ -25,13 +25,16 @@ export const SessionPlanFormArray = () => {
                   {...register(`sessionPlan[${index}].name`)}
                   type="text" />
               </label>
+
               <label
-                className="form__label"
-              >Session Focus:
+                className="form__label">Session Focus:
                 <select
                   className="form__input form__input--select"
                   name={`sessionPlan[${index}].sessionFocus`}
-                  {...register(`sessionPlan[${index}].sessionFocus`)}
+                  {...register(
+                    `sessionPlan[${index}].sessionFocus`, {
+                      
+                    })}
                 >
                   <option value="Intenstiy">Intensity</option>
                   <option value="Volume">Volume</option>

@@ -9,8 +9,8 @@ export const SessionPlanSchema = yup.object().shape({
       yup.object().shape({
         exercise: yup.string().required(),
         repRange: yup.object().shape({
-          min: yup.number(),
-          max: yup.number(),
+          min: yup.string(),
+          max: yup.string(),
         })
       })
     )

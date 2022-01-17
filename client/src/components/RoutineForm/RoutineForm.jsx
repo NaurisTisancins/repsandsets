@@ -44,7 +44,9 @@ export const RoutineForm = ({ initialValues }) => {
     defaultValues: defaultValues,
   });
 
-  const { error, isDirty, isValid } = methods.formState;
+  const { errors, isDirty, isValid } = methods.formState;
+
+  console.log("form errors",errors)
 
   useEffect(() => {
     if (initialValues && !populated) {
@@ -55,7 +57,8 @@ export const RoutineForm = ({ initialValues }) => {
     }
   }, [setPopulated, initialValues])
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
+    console.log(values)
     if (populated) {
       const updates = {
         ...initialValues,
@@ -64,8 +67,9 @@ export const RoutineForm = ({ initialValues }) => {
       updateRoutine(initialValues._id, updates)
       navigate("/")
     } else {
-      createRoutine(values);
-      // navigate(`/routines/add/session-plan/${id}`)
+      const id = await createRoutine(values);
+      navigate(`/routines/${id}`)
+      // navigate("/")
     }
     methods.reset(defaultValues);
   };//onsubmit
@@ -75,13 +79,17 @@ export const RoutineForm = ({ initialValues }) => {
       <form className="form" onSubmit={methods.handleSubmit(onSubmit)}>
 
         <div className="form__group">
-          <label className="form__label">Routine name: </label>
-          <input
-            className="form__input"
-            type="text"
-            name="name"
-            {...methods.register("name")}
-          />
+          <label className="form__label">Routine name:
+            <input
+              className="form__input"
+              type="text"
+              name="name"
+              {...methods.register("name", {
+                required: true
+              })}
+            />
+            {errors.name && <p className="form__err-msg">Please Select a routine name</p>}
+          </label>
         </div>
 
         <div className="form__group form__group--options">
@@ -90,20 +98,23 @@ export const RoutineForm = ({ initialValues }) => {
             <select
               className="form__input"
               name="units"
-              {...methods.register("units")}
+              {...methods.register("units", { required: true })}
+              defaultValue="kg"
             >
               <option value="kg">Kg</option>
               <option value="lbs">Lbs</option>
             </select>
+            {errors.units && <p>Please Select unit: 'kg' or 'lbs'</p>}
           </label>
         </div>
 
         <SessionPlanFormArray />
-        
+
         <section className="form__button-area">
           <button
             className="button form__btn--submit"
             type="submit"
+            disabled={!isDirty || !isValid}
           >
             Save Routine
           </button>

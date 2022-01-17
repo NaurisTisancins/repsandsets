@@ -1,15 +1,24 @@
+$primary: #339989;
+$secondary: #7de2d1;
+$white: #fff;
+$gray: #cfdbd5;
+$dark: #131515;
+$light-dark: #2b2c28;
+$danger: #d90429;
+
 .detailContainer {
   margin-left: 1.5rem;
+  color: $white;
 }
 
 .routineMovements h3 {
   font-size: 2rem;
   text-align: start;
-  border-bottom: 1px solid #fffafb;
+  border-bottom: 1px solid $white;
 }
 
 .routineMovements {
-  border-bottom: 1px solid #fffafb;
+  border-bottom: 1px solid $white;
 }
 .movementList {
   list-style: none;

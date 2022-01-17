@@ -16,16 +16,16 @@ $danger: #d90429;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40rem;
+  width: 30rem;
   margin: 1rem 0 1rem 0;
 }
 
 .form.form__field-array.form__field-array--session {
-  width: 39rem;
+  width: 29rem;
 }
 
 .form.form__field-array.form__field-array--exercises {
-  width: 38rem;
+  width: 28rem;
 }
 
 .form__subtitle {
@@ -48,7 +48,7 @@ $danger: #d90429;
   width: 33.3%;
 }
 .form__input.form__input--min-max {
-  width: 23.3%;
+  width: 20.3%;
 }
 
 .form__label {
@@ -89,4 +89,8 @@ $danger: #d90429;
 .button.form__btn--submit {
   width: 80%;
   height: 2.5rem;
+}
+
+.form__err-msg {
+  color: $danger;
 }
